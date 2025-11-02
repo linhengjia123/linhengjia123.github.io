@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hector 仿真 & MPC 学习站</title>
+<style>
+:root { --bg:#0b1220; --card:#0f172a; --text:#e5e7eb; --muted:#9aa4b2; --accent:#8b5cf6; --border:#1f2937; }
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Noto Sans SC,sans-serif;line-height:1.65}
+header{position:sticky;top:0;background:rgba(11,18,32,.75);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);padding:14px 20px;z-index:10}
+header h1{margin:0;font-size:20px} .wrap{display:grid;grid-template-columns:260px 1fr;gap:22px;padding:20px}
+nav{position:sticky;top:64px;height:calc(100vh - 84px);overflow:auto;border-right:1px solid var(--border);padding-right:14px}
+nav h3{margin:8px 0;color:var(--muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+nav a{display:block;color:var(--muted);text-decoration:none;padding:6px 0;font-size:14px} nav a:hover{color:var(--text)}
+section.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:18px}
+h1,h2,h3,h4{scroll-margin-top:80px} pre{background:#0c1629;border:1px solid #23324a;border-radius:10px;padding:12px;overflow:auto}
+img{max-width:100%;height:auto;border:1px solid var(--border);border-radius:10px}
+.footer{text-align:center;color:var(--muted);padding:20px 0}
+.badge{display:inline-block;padding:2px 8px;border:1px solid #3a4b6a;border-radius:999px;color:#9fb0d3;font-size:12px;margin-left:8px}
+hr.sep{border:none;border-top:1px dashed var(--border);margin:14px 0}
+.note{background:#0d1a33;border:1px solid #22345a;border-radius:8px;padding:10px 12px;margin:10px 0;color:#cfe1ff}
+</style>
+</head>
+<body>
+<header>
+  <h1>Hector 仿真 & MPC 学习站 <span class="badge">单页·可直接部署</span></h1>
+</header>
+<div class="wrap">
+  <nav>
+    <h3>目录</h3>
+    <div id="toc"></div>
+  </nav>
+  <main>
+    <section class="card note">
+      <strong>更新：</strong>根据你的实际复现结果，已将 <em>“CMake 版本不足”</em> 的处理方式改为：
+      <code>sudo snap install cmake --classic</code>，并在编译 qpOASES 时使用 <code>/snap/bin/cmake</code>，无需卸载系统自带 cmake。
+    </section>
+    <section class="card" id="md">
+      <h2>主笔记（Markdown）</h2>
+      <h1>📝 Hector 双足仿真学习笔记（Ubuntu 20.04 + ROS Noetic）</h1>
+<p></p>
+<h2>1. 系统与环境配置</h2>
+<p></p>
+<h3>（1）系统安装</h3>
+<ul>
+<li>操作系统：**Ubuntu 20.04**</li>
+<li>安装时选择 **safe graphics** 模式以保证兼容性。</li>
+
+</ul><p></p>
+<h3>（2）更新系统</h3>
+<pre><code>sudo apt update
+sudo apt upgrade -y</code></pre>
+<p></p>
+<h3>（3）安装常用工具</h3>
+<pre><code>sudo apt install -y git cmake build-essential curl</code></pre>
+<p></p>
+<p>---</p>
+<p></p>
+<h2>2. 安装 ROS Noetic</h2>
+<p></p>
+<h3>（1）添加软件源与密钥</h3>
+<pre><code>sudo sh -c &#x27;echo &quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list&#x27;
+sudo apt install -y curl
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -</code></pre>
+<p></p>
+<h3>（2）安装 ROS 桌面完整版</h3>
+<pre><code>sudo apt update
+sudo apt install ros-noetic-desktop-full -y</code></pre>
+<p></p>
+<h3>（3）初始化 rosdep</h3>
+<pre><code>sudo rosdep init
+rosdep update</code></pre>
+<p></p>
+<h3>（4）添加环境变量</h3>
+<pre><code>echo &quot;source /opt/ros/noetic/setup.bash&quot; &gt;&gt; ~/.bashrc
+source ~/.bashrc</code></pre>
+<p></p>
+<p>---</p>
+<p></p>
+<h2>3. 创建工作空间</h2>
+<pre><code>mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws
+catkin_make</code></pre>
+<p></p>
+<p>---</p>
+<p></p>
+<h2>4. 克隆 Hector 仿真项目与依赖</h2>
+<p></p>
+<h3>（1）进入 src 目录</h3>
+<pre><code>cd ~/catkin_ws/src</code></pre>
+<p></p>
+<h3>（2）克隆主项目</h3>
+<pre><code>git clone https://github.com/guoliang12/Hector_Simulation.git</code></pre>
+<p></p>
+<p>&gt; 📘 若包含子模块（如 unitree_gazebo），执行：</p>
+<pre><code>git submodule update --init --recursive</code></pre>
+<p></p>
+<p>---</p>
+<p></p>
+<h2>5. 安装 qpOASES 求解器（MPC 用）</h2>
+<p></p>
+<h3>（1）克隆源码</h3>
+<pre><code>cd ~/catkin_ws/src
+git clone https://github.com/coin-or/qpOASES.git
+cd qpOASES
+mkdir build &amp;&amp; cd build</code></pre>
+<p></p>
+<h3>（2）解决 CMake 版本不足（已验证用 snap 方式可行✅）</h3>
+<p>Ubuntu 20.04 默认 cmake 3.16，若编译 qpOASES 需要 ≥3.18：</p>
+<pre><code>sudo snap install cmake --classic
+/snap/bin/cmake --version</code></pre>
+<p>sudo apt remove cmake -y</p>
+<p>sudo snap install cmake --classic</p>
+<p>cmake --version</p>
+<pre><code>
+### （3）编译安装</code></pre>
+<p>/snap/bin/cmake ..</p>
+<p>make -j$(nproc)</p>
+<p>sudo make install</p>
+<pre><code>
+---
+
+## 6. 编译整个项目</code></pre>
+<p>cd ~/catkin_ws</p>
+<p>catkin_make -DCMAKE_BUILD_TYPE=Release</p>
+<pre><code>
+---
+
+## 7. 设置环境变量
+</code></pre>
+<p>echo &quot;source ~/catkin_ws/devel/setup.bash&quot; &gt;&gt; ~/.bashrc</p>
+<p>echo &quot;export GAZEBO_PLUGIN_PATH=\$GAZEBO_PLUGIN_PATH:~/catkin_ws/devel/lib&quot; &gt;&gt; ~/.bashrc</p>
+<p>echo &quot;export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:~/catkin_ws/src/Hector_Simulation/models&quot; &gt;&gt; ~/.bashrc</p>
+<p>source ~/.bashrc</p>
+<pre><code>
+---
+
+## 8. 运行仿真
+
+### （1）启动 Gazebo</code></pre>
+<p>roslaunch unitree_gazebo biped.launch</p>
+<pre><code>
+### （2）另开终端启动控制器</code></pre>
+<p>rosrun hector_control hector_ctrl</p>
+<pre><code>
+输出示例：</code></pre>
+<p>MPC Solve time: 1.081072 ms</p>
+<p>Contact 0: 0.5</p>
+<p>swing 1: 0.505</p>
+<pre><code>
+---
+
+## 9. Gazebo 刷新率优化
+
+### （1）查看渲染方式</code></pre>
+<p>sudo apt install -y mesa-utils</p>
+<p>glxinfo | grep -i &quot;OpenGL renderer&quot;</p>
+<pre><code>- 若为 **llvmpipe** → 软件渲染，需安装驱动。
+- 若为 **NVIDIA / Intel / AMD** → 正常。
+
+### （2）安装显卡驱动（NVIDIA 示例）</code></pre>
+<p>sudo ubuntu-drivers devices</p>
+<p>sudo ubuntu-drivers autoinstall</p>
+<p>sudo reboot</p>
+<pre><code>
+验证：</code></pre>
+<p>glxinfo | grep -i &quot;OpenGL renderer&quot;</p>
+<p>nvidia-smi</p>
+<pre><code>
+### （3）Gazebo 内部优化
+- 关闭阴影（View → Shadows 取消勾选）；
+- 降低分辨率；
+- Headless 模式运行：</code></pre>
+<p>  roslaunch unitree_gazebo biped.launch gui:=false</p>
+    </section>
+    <section class="card" id="docx">
+      <h2>附：安装环境（Word 摘要 + 图片）</h2>
+      <p>安装环境</p>
+<p>Ubuntu 20.04.6 LTS→ 官方推荐系统，完美支持 ROS Noetic + Gazebo 11。</p>
+<p>下载ubuntu镜像https://releases.ubuntu.com/20.04/</p>
+<p>选择：ubuntu-20.04.6-desktop-amd64.iso（约 3GB）</p>
+<p>写入ubuntu镜像</p>
+<p>使用图吧工具箱中Rufus写入刚刚下载的镜像</p>
+<p>重启，使用u盘进入，安装系统</p>
+<p>最终</p>
+    </section>
+    <section class="card" id="next">
+      <h2>后续方向：MPC 实现与改进</h2>
+      <ul>
+        <li>阅读控制节点中 MPC 的状态、代价与约束构建；明确 qpOASES 的 H/g/A/lb/ub 组织与求解周期。</li>
+        <li>实验 Q/R 权重、预测步长（Np/Nc）变化对步态稳定性与能耗的影响；记录 rosbag 并做频域分析。</li>
+        <li>引入扰动观测与软约束：DOBC-MPC、Slack 变量惩罚、参考轨迹滚动更新。</li>
+        <li>工程化：参数抽为 YAML；支持 headless/GUI；提供一键复现实验脚本。</li>
+      </ul>
+      <hr class="sep" />
+    </section>
+    <div class="footer">© 2025 学习站 · 可直接放到 GitHub Pages / Nginx / Apache</div>
+  </main>
+</div>
+<script>
+// 目录自动生成
+const toc = document.getElementById('toc');
+document.querySelectorAll('main h2, main h3').forEach((h, i) => {
+  if (!h.id) h.id = 'sec' + i;
+  const a = document.createElement('a');
+  a.href = '#' + h.id;
+  a.textContent = h.textContent;
+  toc.appendChild(a);
+});
+</script>
+</body>
+</html>
