@@ -34,8 +34,8 @@
       <div>
         <h1 class="text-3xl md:text-4xl font-extrabold leading-tight">你好，我是林恒嘉</h1>
         <p class="mt-3 text-slate-600">
-          硕士生 · 控制工程方向（广义重复控制 / 前馈控制 / 机器人交互）。目前在日本广岛大学
-          Advanced Science and Engineering 学院就读，专注于提升跟踪精度与人机柔顺交互。
+          硕士研究生 · 控制工程方向（时延控制器 / 前馈控制 / 机器人交互）。目前在日本广岛大学
+          先进理工学院就读，机械工学，专注于提升跟踪精度与人机柔顺交互。
         </p>
         <div class="mt-4 flex flex-wrap gap-3 text-sm">
           <a href="#research" class="px-4 py-2 rounded-xl bg-slate-900 text-white">查看研究</a>
@@ -53,31 +53,28 @@
       <div class="card border rounded-2xl p-6">
         <h3 class="font-semibold mb-3">联系方式</h3>
         <ul class="space-y-2 text-sm">
-          <li>Email：<a class="text-blue-600" href="mailto:m240056@hiroshima-u.ac.jp">m240056@hiroshima-u.ac.jp</a></li>
-          <li>GitHub：<a class="text-blue-600" href="https://github.com/你的用户名" target="_blank">github.com/你的用户名</a></li>
-          <li>X / Twitter：<a class="text-blue-600" href="https://x.com/你的用户名" target="_blank">@你的用户名</a></li>
+          <li>Email：<a class="text-blue-600" href="mailto:m240056@hiroshima-u.ac.jp">linhengjia@yeah.net</a></li>
         </ul>
       </div>
       <div class="card border rounded-2xl p-6">
         <h3 class="font-semibold mb-3">研究兴趣</h3>
         <div class="flex flex-wrap gap-2 text-sm">
-          <span class="px-3 py-1 rounded-full border">Repetitive Control</span>
-          <span class="px-3 py-1 rounded-full border">Feedforward Control</span>
+          <span class="px-3 py-1 rounded-full border">前馈控制</span>
           <span class="px-3 py-1 rounded-full border">力传感器无反馈</span>
-          <span class="px-3 py-1 rounded-full border">人机交互/柔顺</span>
+          <span class="px-3 py-1 rounded-full border">人机交互/柔顺力控</span>
           <span class="px-3 py-1 rounded-full border">机器人控制</span>
         </div>
       </div>
       <div class="card border rounded-2xl p-6">
         <h3 class="font-semibold mb-3">教育背景</h3>
         <ul class="space-y-2 text-sm">
-          <li>2024–至今 · 硕士 · 广岛大学 · 控制工程</li>
-          <li>此前 · 本科/研究生（示例）· 学校/专业（请替换）</li>
+          <li>2023–至今 · 硕士 · 广岛大学 · 机械工学</li>
+          <li>2019–2023 · 本科 · 广东工业大学 · 机械电子工程</li>
         </ul>
       </div>
       <div class="card border rounded-2xl p-6">
         <h3 class="font-semibold mb-3">目前状态</h3>
-        <p class="text-sm">正在写作/完善论文：<em>Quasi-periodic position & quasi-aperiodic impedance via feedforward</em>（示例，可替换）。</p>
+        <p class="text-sm">正在写作/完善论文：<em>Quasi-periodic position and quasi-aperiodic admittance control with acceleration compensation</em>（示例，可替换）。</p>
       </div>
     </div>
   </section>
@@ -135,10 +132,7 @@
     <script>
       // 在这里添加你的笔记（标题、日期、链接、标签）
       const notes = [
-        { title: "重复控制速览：原理与实现", date: "2025-10-12", url: "notes/rc-overview.html", tags:["Repetitive Control"] },
-        { title: "前馈设计：从频域直觉到实现", date: "2025-09-05", url: "notes/feedforward.html", tags:["Feedforward","Control"] },
-        { title: "Bode 图与延迟：避免不必要的近似", date: "2025-08-20", url: "notes/bode-delay.html", tags:["Frequency","Delay"] },
-        // 在此继续添加……
+        { title: " Hector 双足仿真学习", date: "2025-11-12", url: "notes/Hector.html", tags:["MPC","ROS","Gazebo"] }
       ];
       const list = document.getElementById("notes-list");
       notes.forEach(n=>{
@@ -181,3 +175,4 @@
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
+
