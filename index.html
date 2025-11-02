@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>林恒嘉 | 个人主页</title>
+  <meta name="description" content="自我介绍 · 基本信息 · 研究 · 学习笔记" />
+  <link rel="icon" href="data:,">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html{scroll-behavior:smooth}
+    @media (prefers-color-scheme: dark){
+      body{background:#0b0f19;color:#e5e7eb}
+      .card{background:#0f1424;border-color:#1f2a44}
+      .muted{color:#9aa4b2}
+      header{background:rgba(10,14,25,.7)}
+    }
+  </style>
+</head>
+<body class="antialiased text-slate-800">
+  <!-- 顶部导航 -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#" class="font-bold text-lg">Lin Hengjia</a>
+      <nav class="hidden md:flex gap-6 text-sm">
+        <a href="#intro" class="hover:opacity-80">自我介绍</a>
+        <a href="#info" class="hover:opacity-80">基本信息</a>
+        <a href="#research" class="hover:opacity-80">研究</a>
+        <a href="#notes" class="hover:opacity-80">学习笔记</a>
+      </nav>
+      <a href="#contact" class="hidden md:inline-block px-3 py-2 rounded-xl bg-slate-900 text-white">联系</a>
+    </div>
+  </header>
+
+  <!-- Hero / 自我介绍 -->
+  <section id="intro" class="bg-slate-50">
+    <div class="max-w-5xl mx-auto px-4 py-16 md:py-20 grid md:grid-cols-[120px_1fr] gap-6 items-center">
+      <img src="avatar.jpg" alt="头像" class="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border shadow">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-extrabold leading-tight">你好，我是林恒嘉</h1>
+        <p class="mt-3 text-slate-600">
+          硕士生 · 控制工程方向（广义重复控制 / 前馈控制 / 机器人交互）。目前在日本广岛大学
+          Advanced Science and Engineering 学院就读，专注于提升跟踪精度与人机柔顺交互。
+        </p>
+        <div class="mt-4 flex flex-wrap gap-3 text-sm">
+          <a href="#research" class="px-4 py-2 rounded-xl bg-slate-900 text-white">查看研究</a>
+          <a href="#notes" class="px-4 py-2 rounded-xl border">学习笔记</a>
+          <a href="CV.pdf" class="px-4 py-2 rounded-xl border" target="_blank">CV / 履历</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 基本信息 -->
+  <section id="info" class="max-w-5xl mx-auto px-4 py-14">
+    <h2 class="text-2xl font-bold">基本信息 <span class="muted text-slate-500 text-base">Basics</span></h2>
+    <div class="mt-6 grid md:grid-cols-2 gap-6">
+      <div class="card border rounded-2xl p-6">
+        <h3 class="font-semibold mb-3">联系方式</h3>
+        <ul class="space-y-2 text-sm">
+          <li>Email：<a class="text-blue-600" href="mailto:m240056@hiroshima-u.ac.jp">m240056@hiroshima-u.ac.jp</a></li>
+          <li>GitHub：<a class="text-blue-600" href="https://github.com/你的用户名" target="_blank">github.com/你的用户名</a></li>
+          <li>X / Twitter：<a class="text-blue-600" href="https://x.com/你的用户名" target="_blank">@你的用户名</a></li>
+        </ul>
+      </div>
+      <div class="card border rounded-2xl p-6">
+        <h3 class="font-semibold mb-3">研究兴趣</h3>
+        <div class="flex flex-wrap gap-2 text-sm">
+          <span class="px-3 py-1 rounded-full border">Repetitive Control</span>
+          <span class="px-3 py-1 rounded-full border">Feedforward Control</span>
+          <span class="px-3 py-1 rounded-full border">力传感器无反馈</span>
+          <span class="px-3 py-1 rounded-full border">人机交互/柔顺</span>
+          <span class="px-3 py-1 rounded-full border">机器人控制</span>
+        </div>
+      </div>
+      <div class="card border rounded-2xl p-6">
+        <h3 class="font-semibold mb-3">教育背景</h3>
+        <ul class="space-y-2 text-sm">
+          <li>2024–至今 · 硕士 · 广岛大学 · 控制工程</li>
+          <li>此前 · 本科/研究生（示例）· 学校/专业（请替换）</li>
+        </ul>
+      </div>
+      <div class="card border rounded-2xl p-6">
+        <h3 class="font-semibold mb-3">目前状态</h3>
+        <p class="text-sm">正在写作/完善论文：<em>Quasi-periodic position & quasi-aperiodic impedance via feedforward</em>（示例，可替换）。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 研究 -->
+  <section id="research" class="bg-slate-50">
+    <div class="max-w-5xl mx-auto px-4 py-14">
+      <h2 class="text-2xl font-bold">研究 <span class="muted text-slate-500 text-base">Research</span></h2>
+      <p class="mt-3 text-slate-600">以下为代表性成果/在研方向（标题、作者、年份、链接）：</p>
+
+      <div class="mt-6 space-y-4">
+        <!-- Paper / Project item -->
+        <article class="card border rounded-2xl p-6">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-semibold"><a class="hover:underline" href="paper_or_project_link_1" target="_blank">[示例] Quasi-periodic Position & Quasi-aperiodic Impedance Control using Feedforward</a></h3>
+              <p class="text-sm text-slate-600">H. Lin, et al., 2025. <a class="text-blue-600" href="pdf_link_1" target="_blank">PDF</a> · <a class="text-blue-600" href="project_page_1" target="_blank">Project</a></p>
+              <p class="mt-2 text-sm">简述：提升跟踪精度，兼顾人机交互的稳定与柔顺（请替换为真实摘要）。</p>
+            </div>
+            <img src="thumb1.jpg" alt="缩略图1" class="w-24 h-16 object-cover rounded-lg border">
+          </div>
+        </article>
+
+        <article class="card border rounded-2xl p-6">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-semibold"><a class="hover:underline" href="paper_or_project_link_2" target="_blank">[示例] Enhanced Odd-Harmonic Repetitive Control …</a></h3>
+              <p class="text-sm text-slate-600">H. Lin, et al., 2024. <a class="text-blue-600" href="#" target="_blank">PDF</a></p>
+              <p class="mt-2 text-sm">简述：放这里写 1–2 句贡献点或实验平台（请替换）。</p>
+            </div>
+            <img src="thumb2.jpg" alt="缩略图2" class="w-24 h-16 object-cover rounded-lg border">
+          </div>
+        </article>
+      </div>
+
+      <!-- 可折叠“更多” -->
+      <details class="mt-4">
+        <summary class="cursor-pointer text-sm text-slate-600">更多项目/论文</summary>
+        <ul class="mt-3 list-disc list-inside text-sm space-y-1">
+          <li>[2025] 标题 · 链接</li>
+          <li>[2024] 标题 · 链接</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <!-- 学习笔记 -->
+  <section id="notes" class="max-w-5xl mx-auto px-4 py-14">
+    <h2 class="text-2xl font-bold">学习笔记 <span class="muted text-slate-500 text-base">Study Notes</span></h2>
+    <p class="mt-3 text-slate-600">把你在控制/机器人/数学/编程的要点做成短文链接，长期更新。</p>
+
+    <!-- 自动渲染一个简易“笔记列表”（只需在 notes 数组里添加条目） -->
+    <div id="notes-list" class="mt-6 grid md:grid-cols-2 gap-4"></div>
+
+    <script>
+      // 在这里添加你的笔记（标题、日期、链接、标签）
+      const notes = [
+        { title: "重复控制速览：原理与实现", date: "2025-10-12", url: "notes/rc-overview.html", tags:["Repetitive Control"] },
+        { title: "前馈设计：从频域直觉到实现", date: "2025-09-05", url: "notes/feedforward.html", tags:["Feedforward","Control"] },
+        { title: "Bode 图与延迟：避免不必要的近似", date: "2025-08-20", url: "notes/bode-delay.html", tags:["Frequency","Delay"] },
+        // 在此继续添加……
+      ];
+      const list = document.getElementById("notes-list");
+      notes.forEach(n=>{
+        const el = document.createElement("a");
+        el.href = n.url; el.target = "_blank";
+        el.className = "card border rounded-2xl p-5 block hover:shadow-sm transition";
+        el.innerHTML = `
+          <div class="text-sm text-slate-500">${n.date}</div>
+          <div class="mt-1 font-semibold">${n.title}</div>
+          <div class="mt-2 flex flex-wrap gap-2 text-xs">
+            ${(n.tags||[]).map(t=>`<span class="px-2 py-1 rounded-full border">${t}</span>`).join("")}
+          </div>`;
+        list.appendChild(el);
+      });
+    </script>
+  </section>
+
+  <!-- 联系方式 -->
+  <section id="contact" class="bg-slate-50">
+    <div class="max-w-5xl mx-auto px-4 py-14">
+      <h2 class="text-2xl font-bold">联系 <span class="muted text-slate-500 text-base">Contact</span></h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-6">
+        <div class="card border rounded-2xl p-6">
+          <p class="text-sm">欢迎交流合作/研讨。可通过邮箱或表单联系我。</p>
+          <a class="inline-block mt-4 px-4 py-2 rounded-xl bg-slate-900 text-white" href="mailto:m240056@hiroshima-u.ac.jp">发送邮件</a>
+        </div>
+        <div class="card border rounded-2xl p-0 overflow-hidden">
+          <!-- 可替换为你的 Google 表单 iframe -->
+          <iframe src="" title="contact-form" style="width:100%;height:280px;border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t">
+    <div class="max-w-5xl mx-auto px-4 py-10 text-sm text-slate-500">
+      © <span id="year"></span> Lin Hengjia · All rights reserved
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
